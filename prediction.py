@@ -23,17 +23,12 @@ oov_tok = "<OOV>"
 tokenizer = Tokenizer(num_words=vocab_size, oov_token=oov_tok)
 tokenizer.fit_on_texts(training_sentences)
 
-
-# dictionary where key : emotion , value : list
 encode_emotions = {
                     "Neutral": [0,"./static/assets/emoticons/neutral.png"],
                     "Positive": [1,"./static/assets/emoticons/positive.png"],
                     "Negative": [2,"./static/assets/emoticons/negative.png"]
                     }
-
-
 def predict(text):
-
     sentiment = ""
     emoji_url = ""
     customer_review = []
@@ -44,7 +39,6 @@ def predict(text):
     label = np.argmax(result , axis=1)
     label = int(label)
 
-    # extracting emotion and url from dictionary
     for emotion in encode_emotions:
         if encode_emotions[emotion][0]  ==  label:
             sentiment = emotion
