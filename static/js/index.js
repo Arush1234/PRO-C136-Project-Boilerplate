@@ -2,12 +2,10 @@ $(document).ready(function(){
 
     console.log('Document is Ready')
 
-    //  getting the date using Date() object and converting it to a string
     let date = new Date()
     let current_date = date.toDateString()
 
-    //  display the date on the HTML page using JQUERY and JS
-    $('').text('Date : ' + current_date)
+    $('#date').text('Date : ' + current_date)
 
     
     let review = ""
@@ -22,7 +20,7 @@ $(document).ready(function(){
         $.ajax({
 
             // type of request
-            type : '',
+            type : 'POST',
 
             // url
             url : api_url,
@@ -97,9 +95,9 @@ $(document).ready(function(){
     })
 
     //  check if Submit button under 'camera' is clicked and get the review accordingly
-    $('').click(function(){
+    $('#c_button').click(function(){
 
-        review = $('').val()
+        review = $('#c_textbox').val()
         input_data = {'customer_review' : review}
         ajax_request('/predict' , input_data)
 
@@ -107,39 +105,33 @@ $(document).ready(function(){
     })
 
     //  check if Submit button under 'headphones' is clicked and get the review accordingly
-    $('').click(function(){
+    $('#h_button').click(function(){
 
-        review = $('').val()
+        review = $('#h_textbox').val()
         input_data = {'customer_review' : review}
         ajax_request('/predict' , input_data)
 
         product = 'Headphones'
     })
 
-    //  check if Submit button under 'videogame' is clicked and get the review accordingly
-    $('').click(function(){
+    $('#v_button').click(function(){
 
-        review = $('').val()
+        review = $('#v_textbox').val()
         input_data = {'customer_review' : review}
         ajax_request('/predict' , input_data)
 
         product = 'Video Games'
     })
 
-
-    //  if SAVE button is clicked, hit a post request on the API
-
-    $('').click(function(){
+    $('#save_button').click(function(){
 
         console.log('save button is clicked')
 
-        //  input data 
         input_data = {'date' : date , 'product' : product , 'review' : review , 'sentiment' : emotion}
 
-        //  ajax call
         $.ajax({
-            type : '',
-            url : '',
+            type : 'POST',
+            url : '/save',
             data : JSON.stringify(input_data),
             dataType : 'json',
             contentType : 'application/json',
@@ -158,7 +150,4 @@ $(document).ready(function(){
         $('#v_textbox').val('')
     })
 
-
 })
-
-    
